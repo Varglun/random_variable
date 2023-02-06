@@ -34,4 +34,14 @@ class DescreteProdOp:
 
     @staticmethod
     def product(fun1, fun2):
-        if isinstance(fun1) and isinstance(f)
+        if isinstance(fun1, OneSideDescrete) and isinstance(fun2, OneSideDescrete):
+            return OneSideDescrete(x0=max(fun1.x0, fun2.x0), fun=ProdOp.product(fun1.fun, fun2.fun))
+        elif isinstance(fun2, DescreteSumFun):
+            return DescreteSumOp.sum(DescreteProdOp.product(fun1, fun2.fun1), DescreteProdOp.product(fun1, fun2.fun2))
+        elif isinstance(fun1, DescreteSumFun):
+            return DescreteSumOp.sum(DescreteProdOp.product(fun2, fun1.fun1), DescreteProdOp.product(fun2, fun1.fun2))  
+        elif isinstance(fun1, Fun) and isinstance(fun2, OneSideDescrete):
+            return OneSideDescrete(x0=fun2.x0, fun=ProdOp.product(fun1, fun2.fun))
+        elif isinstance(fun2, Fun) and isinstance(fun1, OneSideDescrete):
+            return OneSideDescrete(x0=fun1.x0, fun=ProdOp.product(fun2, fun1.fun))            
+                   
