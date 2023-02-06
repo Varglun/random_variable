@@ -43,5 +43,5 @@ class DescreteProdOp:
         elif isinstance(fun1, Fun) and isinstance(fun2, OneSideDescrete):
             return OneSideDescrete(x0=fun2.x0, fun=ProdOp.product(fun1, fun2.fun))
         elif isinstance(fun2, Fun) and isinstance(fun1, OneSideDescrete):
-            return OneSideDescrete(x0=fun1.x0, fun=ProdOp.product(fun2, fun1.fun))            
+            return OneSideDescrete(x0=fun1.x0, fun=ProdOp.product(fun2, fun1.fun))
                    

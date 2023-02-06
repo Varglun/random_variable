@@ -1,9 +1,25 @@
-сlass Destribution:
-  def __init__(self):
-    pass
+class Destribution:
+    def __init__(self) -> None:
+        pass
+        
+class RandomVariable:
+    def __init__(self) -> None:
+        pass
 
 
-class ContinDestr(Destribution):
-  def __init__(destr_funct, df_type='pdf'):
-    if df_type == 'pdf':
-      self.pdf = destr_funct
+class ContiniousRandomVariable(RandomVariable):
+    def __init__(self, pdf) -> None:
+        super().__init__()
+        self.pdf = pdf
+
+
+class DescreteRandomVariable(RandomVariable):
+    def __init__(self, pmf) -> None:
+        super().__init__()
+        self.pmf
+
+
+class DC_RandomVariable(RandomVariable):
+    def __init__(self, pmf) -> None:
+        super().__init__()
+        self.pmf

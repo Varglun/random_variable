@@ -1,4 +1,5 @@
-from ContiniousFunctions import ExpFun, PowFun, ProdOp, SumOp, ConstFun, CompFun, SumFun, ProdDblFun, ProdTrplFun
+from ContiniousFunctions import ExpFun, PowFun, ProdOp, SumOp, ConstFun, CompFun, SumFun, ProdDblFun, ProdTrplFun, LinFunIntegr
+from DescrFunc import OneSideDescrete, DescreteSumOp, DescreteProdOp
 
 
 class LinOp:
@@ -116,9 +117,22 @@ class DefIntegrator(Integrator):
   @staticmethod
   def descr_fun_int(fun, a, b):
     # integrate descrete function
-    fun_right = 
-    intervls = []
-    funs = []
+    if a.k == 0:
+      if a.b < fun.x0:
+        func1 = ConstFun(0)
+      else:
+        func1 = DefIntegrator.integrate(ProdOp.product(fun.fun, Const(-1)), LinFunIntegr(k=0, b=fun.x0), a)
+    else:
+      func1 = OneSideDescrete(x0=fun.x0/a.k - a.b/a.k, fun=DefIntegrator.integrate(ProdOp.product(fun.fun, Const(-1)), LinFunIntegr(k=0, b=fun.x0), a))
+    if b.k == 0:
+      if b.b < fun.x0:
+        func2 = ConstFun(0)
+      else:
+        func2 = DefIntegrator.integrate(fun.fun, LinFunIntegr(k=0, b=fun.x0), b)
+    else:
+      func2 = OneSideDescrete(x0=fun.x0/b.k - b.b/b.k, fun=DefIntegrator.integrate(fun.fun, LinFunIntegr(k=0, b=fun.x0), b))    
+    return DescreteSumOp.sum(func1, func2)
+
     
     
 
